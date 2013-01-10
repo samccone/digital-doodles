@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<body>
+<style>
+*{
+ padding: 0px;
+ margin: 0px;
+}
+  html {
+    background: #F24B4B;
+  }
+</style>
+<script type="text/javascript">
+ window.requestAnimFrame = (function(){
+    return  window.requestAnimationFrame       ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            window.oRequestAnimationFrame      ||
+            window.msRequestAnimationFrame     ||
+            function( callback ){
+              window.setTimeout(callback, 1000 / 60);
+            };
+  })();
+</script>
+<script type="text/javascript" src="spirals.js"></script>
+</body>
