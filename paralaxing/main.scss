@@ -1,0 +1,25 @@
+@import "compass/reset";
+
+#paralax-container {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  min-height: 100%;
+  min-width: 100%;
+  > div {
+    height: 580px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
+#wrap {
+  position: relative;
+  z-index: 11;
+  > div {
+    width: 100%;
+    padding: 100px 0px;
+    background: rgba(0, 128, 128, 0.54);
+    margin-top: 580px;
+  }
+}
