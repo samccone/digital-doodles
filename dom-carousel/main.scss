@@ -1,0 +1,42 @@
+@import "compass";
+@import "compass/reset";
+
+#container {
+  width: 768px;
+  height: 215px;
+  overflow: hidden;
+  border: 5px solid;
+  margin: 0px auto;
+}
+
+#hold {
+  position: relative;
+  @include transition(transform 200ms);
+  @include perspective(1000);
+  &.stopTransition {
+    @include transition(left 0ms);
+  }
+  td {
+    margin-right: 5px;
+    @include transition(all 400ms);
+    @include transform-style(preserve-3d);
+    @include box-shadow(0px 0px 100px #000);
+    &.active {
+      z-index: 10;
+      position: relative;
+      @include transform(rotateY( 0deg ) translateZ( 70px ));
+    }
+    &.before {
+      @include transform(rotateY( 40deg ) translateZ( 0px ));
+      img {
+        margin-left: -90px;
+      }
+    }
+    &.after {
+      @include transform(rotateY( -40deg ) translateZ( 0px ));
+      img {
+        margin-left: -90px;
+      }
+    }
+  }
+}

@@ -1,0 +1,108 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+html {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+q, blockquote {
+  quotes: none; }
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+a img {
+  border: none; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block; }
+
+#container {
+  width: 768px;
+  height: 215px;
+  overflow: hidden;
+  border: 5px solid;
+  margin: 0px auto; }
+
+#hold {
+  position: relative;
+  -webkit-transition: -webkit-transform 200ms;
+  -moz-transition: -moz-transform 200ms;
+  -o-transition: -o-transform 200ms;
+  transition: transform 200ms;
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  -o-perspective: 1000;
+  perspective: 1000; }
+  #hold.stopTransition {
+    -webkit-transition: left 0ms;
+    -moz-transition: left 0ms;
+    -o-transition: left 0ms;
+    transition: left 0ms; }
+  #hold td {
+    margin-right: 5px;
+    -webkit-transition: all 400ms;
+    -moz-transition: all 400ms;
+    -o-transition: all 400ms;
+    transition: all 400ms;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-box-shadow: 0px 0px 100px black;
+    -moz-box-shadow: 0px 0px 100px black;
+    box-shadow: 0px 0px 100px black; }
+    #hold td.active {
+      z-index: 10;
+      position: relative;
+      -webkit-transform: rotateY(0deg) translateZ(70px);
+      -moz-transform: rotateY(0deg) translateZ(70px);
+      -ms-transform: rotateY(0deg) translateZ(70px);
+      -o-transform: rotateY(0deg) translateZ(70px);
+      transform: rotateY(0deg) translateZ(70px); }
+    #hold td.before {
+      -webkit-transform: rotateY(40deg) translateZ(0px);
+      -moz-transform: rotateY(40deg) translateZ(0px);
+      -ms-transform: rotateY(40deg) translateZ(0px);
+      -o-transform: rotateY(40deg) translateZ(0px);
+      transform: rotateY(40deg) translateZ(0px); }
+      #hold td.before img {
+        margin-left: -90px; }
+    #hold td.after {
+      -webkit-transform: rotateY(-40deg) translateZ(0px);
+      -moz-transform: rotateY(-40deg) translateZ(0px);
+      -ms-transform: rotateY(-40deg) translateZ(0px);
+      -o-transform: rotateY(-40deg) translateZ(0px);
+      transform: rotateY(-40deg) translateZ(0px); }
+      #hold td.after img {
+        margin-left: -90px; }
