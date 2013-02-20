@@ -1,0 +1,250 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: none;
+}
+body {
+  line-height: 1;
+  color: #272727;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary {
+  margin: 0;
+  padding: 0;
+  border: 1px solid;
+  outline: 0;
+  display: block;
+}
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+audio:not([controls]),
+[hidden] {
+  display: none;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html,
+body {
+  background: #eaf4fe;
+}
+#wrap {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0px auto;
+  min-width: 520px;
+}
+header {
+  border: 0px;
+  text-align: center;
+  padding: 20px;
+  padding-bottom: 70px;
+  background: #eaf4fe;
+  position: relative;
+  z-index: 10;
+  color: #525252;
+}
+header h1 {
+  margin-bottom: 50px;
+}
+header .orb {
+  width: 190px;
+  height: 190px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  background: #3f4857;
+  display: inline-block;
+  position: relative;
+  color: #fff;
+  line-height: 180px;
+}
+header .orb .hand {
+  width: 8px;
+  height: 126px;
+  position: absolute;
+  top: 150px;
+  background: #3f4857;
+  -webkit-transform: rotateZ(-142deg);
+  -moz-transform: rotateZ(-142deg);
+  -o-transform: rotateZ(-142deg);
+  -ms-transform: rotateZ(-142deg);
+  transform: rotateZ(-142deg);
+  right: 171px;
+}
+header .orb.light {
+  margin-right: 50px;
+  background: #5fbaea;
+}
+header .orb.light .hand {
+  -webkit-transform: rotateZ(142deg);
+  -moz-transform: rotateZ(142deg);
+  -o-transform: rotateZ(142deg);
+  -ms-transform: rotateZ(142deg);
+  transform: rotateZ(142deg);
+  right: 35.5px;
+  background: #5fbaea;
+}
+@media screen and (max-width: 1098px) {
+  header .orb.light .hand {
+    right: 28.5px;
+  }
+}
+@media screen and (max-width: 800px) {
+  header .orb.light .hand {
+    right: 25.5px;
+  }
+}
+.nodes .node {
+  position: relative;
+  width: 40%;
+  max-width: 500px;
+  padding: 25px;
+  left: 6%;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #fbfdff;
+  -webkit-box-shadow: 0 1px 1px #91a8b8;
+  -moz-box-shadow: 0 1px 1px #91a8b8;
+  -o-box-shadow: 0 1px 1px #91a8b8;
+  -ms-box-shadow: 0 1px 1px #91a8b8;
+  box-shadow: 0 1px 1px #91a8b8;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ebf2f8), color-stop(0.02, #fff), color-stop(1, #fff));
+  background: -webkit-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: -moz-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: -o-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: -ms-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+}
+.nodes .node.right {
+  margin-left: 46%;
+}
+.primary_flow {
+  position: fixed;
+  top: 0px;
+  min-height: 100%;
+  min-width: 520px;
+  width: 100%;
+  max-width: 1200px;
+}
+.primary_flow .half {
+  position: absolute;
+  width: 48%;
+  min-height: 100%;
+}
+.primary_flow .left {
+  left: 0;
+  border-right: solid 8px #5fbaea;
+}
+.primary_flow .right {
+  left: 50%;
+  border-left: solid 8px #3f4857;
+}

@@ -1,0 +1,90 @@
+global-reset()
+
+background-blue = #eaf4fe
+light-blue = #5fbaea
+dark-blue = #3f4857
+max-width = 1200px
+*
+  box-sizing: border-box
+
+html, body
+  background: background-blue
+
+#wrap
+  max-width: max-width
+  width: 100%
+  margin: 0px auto
+  min-width: 520px
+header
+  border: 0px
+  text-align: center
+  padding: 20px
+  padding-bottom: 70px
+  background: background-blue
+  position: relative
+  z-index: 10
+  color: #525252
+  h1
+    margin-bottom: 50px
+  .orb
+    width: 190px
+    height: 190px
+    border-radius: 50%
+    background: dark-blue
+    display: inline-block
+    position: relative
+    color: #FFF
+    line-height: 180px
+    .hand
+      width: 8px
+      height: 126px
+      position: absolute
+      top: 150px
+      background: dark-blue
+      transform: rotateZ(-142deg)
+      right: 171px;
+    &.light
+      margin-right: 50px
+      background: light-blue
+      .hand
+        transform: rotateZ(142deg)
+        right: 35.5px
+        background: light-blue
+        @media screen and (max-width: 1098px)
+          right: 28.5px
+        @media screen and (max-width: 800px)
+          right: 25.5px
+
+.nodes
+  .node
+    position: relative;
+    width: 40%;
+    max-width: 500px
+    padding: 25px
+    left: 6%
+    border-radius 3px
+    -moz-background-clip padding
+    -webkit-background-clip padding-box
+    background-clip padding-box
+    background-color #fbfdff
+    box-shadow 0 1px 1px #91a8b8
+    background linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%)
+    &.right
+      margin-left: 46%
+.primary_flow
+  position: fixed
+  top: 0px
+  min-height: 100%
+  min-width: 520px
+  width: 100%
+  max-width: max-width
+  .half
+    position: absolute
+    width: 48%
+    min-height: 100%
+  .left
+    left: 0
+    border-right: solid 8px light-blue
+  .right
+    left 50%
+    border-left: solid 8px dark-blue
