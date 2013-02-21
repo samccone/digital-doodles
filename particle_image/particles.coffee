@@ -36,10 +36,9 @@ mask = new Image
 mask.onload = generateFlockingDots
 
 
-
 run = () ->
-  width             = window.innerWidth
-  height            = window.innerHeight
+  width             = mask.width
+  height            = mask.height
   elm               = document.createElement 'canvas'
   pixelDensity      = window.devicePixelRatio || 1
   particles         = []
@@ -54,9 +53,9 @@ run = () ->
 
   step = 90
   for i in [0 ... flockingDots.length] by step
-    step = ~~(Math.random() * 90) + 30
-    particles.push new Particle ctx, width, height, pixelDensity, i, 'rgba(254, 252, 0, 0.5)'
-    particles.push new Particle ctx, width, height, pixelDensity, i, 'rgba(0, 143, 164, 0.5)'
+    step = ~~(Math.random() * 70) + 30
+    particles.push new Particle ctx, width, height, pixelDensity, i, 'rgba(254, 252, 0'
+    particles.push new Particle ctx, width, height, pixelDensity, i, 'rgba(0, 143, 164'
 
   tick = ->
     requestAnimationFrame(tick)
@@ -69,6 +68,7 @@ run = () ->
 
 class Particle
   constructor: (ctx, width, height, pixelDensity, i, color, velocity) ->
+    @opacity  = 0
     @ctx      = ctx
     @x        = ~~(Math.random() * mask.width)
     @y        = ~~(Math.random() * mask.height)
@@ -76,8 +76,8 @@ class Particle
       x: flockingDots[i].x
       y: flockingDots[i].y
     @velocity =
-      x: ((Math.random() * 6)+0.5) * @plusMinus @x, @idealSpot.x
-      y: ((Math.random() * 6)+0.5) * @plusMinus @y, @idealSpot.y
+      x: ((Math.random() * 3.5)+0.5) * @plusMinus @x, @idealSpot.x
+      y: ((Math.random() * 3.5)+0.5) * @plusMinus @y, @idealSpot.y
     @color         = color
     @
 
@@ -86,8 +86,8 @@ class Particle
 
   draw: ->
     @ctx.beginPath()
-    @ctx.fillStyle = @color
-    @ctx.arc @x, @y, 1, 0, 2 * Math.PI
+    @ctx.fillStyle = @color + ", #{if @opacity < 0.4 then @opacity+=0.0025 else @opacity})"
+    @ctx.arc @x, @y, 2, 0, 2 * Math.PI
     @ctx.fill()
     @ctx.closePath()
     @

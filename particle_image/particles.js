@@ -40,8 +40,8 @@
 
   run = function() {
     var ctx, elm, height, i, particles, pixelDensity, step, tick, width, _i, _ref;
-    width = window.innerWidth;
-    height = window.innerHeight;
+    width = mask.width;
+    height = mask.height;
     elm = document.createElement('canvas');
     pixelDensity = window.devicePixelRatio || 1;
     particles = [];
@@ -53,9 +53,9 @@
     document.body.appendChild(elm);
     step = 90;
     for (i = _i = 0, _ref = flockingDots.length; 0 <= _ref ? _i < _ref : _i > _ref; i = _i += step) {
-      step = ~~(Math.random() * 90) + 30;
-      particles.push(new Particle(ctx, width, height, pixelDensity, i, 'rgba(254, 252, 0, 0.5)'));
-      particles.push(new Particle(ctx, width, height, pixelDensity, i, 'rgba(0, 143, 164, 0.5)'));
+      step = ~~(Math.random() * 70) + 30;
+      particles.push(new Particle(ctx, width, height, pixelDensity, i, 'rgba(254, 252, 0'));
+      particles.push(new Particle(ctx, width, height, pixelDensity, i, 'rgba(0, 143, 164'));
     }
     tick = function() {
       var p, _j, _len, _results;
@@ -74,6 +74,7 @@
   Particle = (function() {
 
     function Particle(ctx, width, height, pixelDensity, i, color, velocity) {
+      this.opacity = 0;
       this.ctx = ctx;
       this.x = ~~(Math.random() * mask.width);
       this.y = ~~(Math.random() * mask.height);
@@ -82,8 +83,8 @@
         y: flockingDots[i].y
       };
       this.velocity = {
-        x: ((Math.random() * 6) + 0.5) * this.plusMinus(this.x, this.idealSpot.x),
-        y: ((Math.random() * 6) + 0.5) * this.plusMinus(this.y, this.idealSpot.y)
+        x: ((Math.random() * 3.5) + 0.5) * this.plusMinus(this.x, this.idealSpot.x),
+        y: ((Math.random() * 3.5) + 0.5) * this.plusMinus(this.y, this.idealSpot.y)
       };
       this.color = color;
       this;
@@ -100,8 +101,8 @@
 
     Particle.prototype.draw = function() {
       this.ctx.beginPath();
-      this.ctx.fillStyle = this.color;
-      this.ctx.arc(this.x, this.y, 1, 0, 2 * Math.PI);
+      this.ctx.fillStyle = this.color + (", " + (this.opacity < 0.4 ? this.opacity += 0.0025 : this.opacity) + ")");
+      this.ctx.arc(this.x, this.y, 2, 0, 2 * Math.PI);
       this.ctx.fill();
       this.ctx.closePath();
       return this;
