@@ -39,7 +39,7 @@
   mask.onload = generateFlockingDots;
 
   run = function() {
-    var ctx, elm, height, i, particles, pixelDensity, tick, width, _i, _ref;
+    var ctx, elm, height, i, particles, pixelDensity, step, tick, width, _i, _ref;
     width = window.innerWidth;
     height = window.innerHeight;
     elm = document.createElement('canvas');
@@ -51,7 +51,9 @@
     elm.setAttribute('height', height * pixelDensity);
     ctx = elm.getContext('2d');
     document.body.appendChild(elm);
-    for (i = _i = 0, _ref = flockingDots.length; _i < _ref; i = _i += 80) {
+    step = 90;
+    for (i = _i = 0, _ref = flockingDots.length; 0 <= _ref ? _i < _ref : _i > _ref; i = _i += step) {
+      step = ~~(Math.random() * 90) + 30;
       particles.push(new Particle(ctx, width, height, pixelDensity, i, 'rgba(254, 252, 0, 0.5)'));
       particles.push(new Particle(ctx, width, height, pixelDensity, i, 'rgba(0, 143, 164, 0.5)'));
     }
@@ -73,15 +75,15 @@
 
     function Particle(ctx, width, height, pixelDensity, i, color, velocity) {
       this.ctx = ctx;
-      this.x = ~~(Math.random() * 100 * pixelDensity);
-      this.y = ~~(Math.random() * 100 * pixelDensity);
+      this.x = ~~(Math.random() * mask.width);
+      this.y = ~~(Math.random() * mask.height);
       this.idealSpot = {
         x: flockingDots[i].x,
         y: flockingDots[i].y
       };
       this.velocity = {
-        x: ((Math.random() * 10) + 0.5) * this.plusMinus(this.x, this.idealSpot.x),
-        y: ((Math.random() * 10) + 0.5) * this.plusMinus(this.y, this.idealSpot.y)
+        x: ((Math.random() * 6) + 0.5) * this.plusMinus(this.x, this.idealSpot.x),
+        y: ((Math.random() * 6) + 0.5) * this.plusMinus(this.y, this.idealSpot.y)
       };
       this.color = color;
       this;
@@ -99,17 +101,19 @@
     Particle.prototype.draw = function() {
       this.ctx.beginPath();
       this.ctx.fillStyle = this.color;
-      this.ctx.arc(this.x, this.y, 5, 0, 2 * Math.PI);
+      this.ctx.arc(this.x, this.y, 1, 0, 2 * Math.PI);
       this.ctx.fill();
       this.ctx.closePath();
       return this;
     };
 
     Particle.prototype.tick = function() {
-      if (Math.abs(this.x - this.idealSpot.x) <= 0.5) {
+      if (Math.abs(this.x - this.idealSpot.x) <= 5) {
+        this.x = this.idealSpot.x;
         this.velocity.x = 0;
       }
-      if (Math.abs(this.y - this.idealSpot.y) <= 0.5) {
+      if (Math.abs(this.y - this.idealSpot.y) <= 5) {
+        this.y = this.idealSpot.y;
         this.velocity.y = 0;
       }
       if (this.x < 0 || this.x > 500) {

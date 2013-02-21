@@ -52,7 +52,9 @@ run = () ->
   ctx     = elm.getContext '2d'
   document.body.appendChild elm
 
-  for i in [0 ... flockingDots.length] by 80
+  step = 90
+  for i in [0 ... flockingDots.length] by step
+    step = ~~(Math.random() * 90) + 30
     particles.push new Particle ctx, width, height, pixelDensity, i, 'rgba(254, 252, 0, 0.5)'
     particles.push new Particle ctx, width, height, pixelDensity, i, 'rgba(0, 143, 164, 0.5)'
 
@@ -68,14 +70,14 @@ run = () ->
 class Particle
   constructor: (ctx, width, height, pixelDensity, i, color, velocity) ->
     @ctx      = ctx
-    @x        = ~~(Math.random() * 100 * pixelDensity)
-    @y        = ~~(Math.random() * 100 * pixelDensity)
+    @x        = ~~(Math.random() * mask.width)
+    @y        = ~~(Math.random() * mask.height)
     @idealSpot =
       x: flockingDots[i].x
       y: flockingDots[i].y
     @velocity =
-      x: ((Math.random() * 10)+0.5) * @plusMinus @x, @idealSpot.x
-      y: ((Math.random() * 10)+0.5) * @plusMinus @y, @idealSpot.y
+      x: ((Math.random() * 6)+0.5) * @plusMinus @x, @idealSpot.x
+      y: ((Math.random() * 6)+0.5) * @plusMinus @y, @idealSpot.y
     @color         = color
     @
 
@@ -85,15 +87,17 @@ class Particle
   draw: ->
     @ctx.beginPath()
     @ctx.fillStyle = @color
-    @ctx.arc @x, @y, 5, 0, 2 * Math.PI
+    @ctx.arc @x, @y, 1, 0, 2 * Math.PI
     @ctx.fill()
     @ctx.closePath()
     @
 
   tick: ->
-    if Math.abs(@x - @idealSpot.x) <= 0.5
+    if Math.abs(@x - @idealSpot.x) <= 5
+      @x = @idealSpot.x
       @velocity.x = 0
-    if Math.abs(@y - @idealSpot.y) <= 0.5
+    if Math.abs(@y - @idealSpot.y) <= 5
+      @y = @idealSpot.y
       @velocity.y = 0
 
     if @x < 0 || @x > 500 then (@velocity.x = @velocity.x * -1 - 0.5)
