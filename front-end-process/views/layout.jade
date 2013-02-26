@@ -6,14 +6,11 @@ html
     meta(name='description', content='description of your site')
     meta(name='author', content= "author of the site")
 
-    title welcome to roots!
-    
+    title doo
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
     link(rel='stylesheet', href='/css/master.css')
   body
     != yield
-
-  //- add other scripts through require.js, not here
-  script(data-main="js/main", src="js/require.js")
 
   //- this must be included for live reload to work in developement
   //- it will be automatically ignored when deployed

@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="description" content="description of your site">
     <meta name="author" content="author of the site">
-    <title>welcome to roots!</title>
+    <title>doo</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/css/master.css">
   </head>
   <body>
@@ -20,67 +21,49 @@
     </div>
   </header>
   <div class="nodes">
-    <div class="node left">
-      <h2>this is a title</h2>
-      <p>this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy</p>
-      <h4>this is a bullet title</h4>
-      <ul>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-      </ul>
-      <div class="circle top"></div>
+    <div class="node-wrap center">
+      <div class="node">
+        <h2>this is a title</h2>
+        <p>this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy</p>
+        <ul>
+          <li>i am an item!</li>
+          <li>i am an item!</li>
+          <li>i am an item!</li>
+        </ul>
+      </div>
+      <div class="node-images bottom"><img src="http://placehold.it/170x100" class="left"/><img src="http://placehold.it/170x100" class="right"/>
+        <div class="cl"></div>
+      </div>
     </div>
-    <div class="node right">
-      <h2>this is a title</h2>
-      <p>this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy</p>
-      <h4>this is a bullet title</h4>
-      <ul>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-      </ul>
-      <div class="circle left"></div>
+    <div class="arrow-top"></div>
+    <div class="node-wrap left">
+      <div class="node-images left"><img src="http://placehold.it/170x100" class="left"/><img src="http://placehold.it/170x100" class="left"/></div>
+      <div class="node left">
+        <h2>this is a title</h2>
+        <p>this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy</p>
+        <h4>this is a bullet title</h4>
+        <ul>
+          <li>i am an item!</li>
+          <li>i am an item!</li>
+          <li>i am an item!</li>
+        </ul>
+      </div>
+      <div class="cl"></div>
     </div>
-    <div class="node left">
-      <h2>this is a title</h2>
-      <p>this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy</p>
-      <h4>this is a bullet title</h4>
-      <ul>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-      </ul>
-    </div>
-    <div class="node right">
-      <h2>this is a title</h2>
-      <p>this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy</p>
-      <h4>this is a bullet title</h4>
-      <ul>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-      </ul>
-    </div>
-    <div class="node left">
-      <h2>this is a title</h2>
-      <p>this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy</p>
-      <h4>this is a bullet title</h4>
-      <ul>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-      </ul>
-    </div>
-    <div class="node right">
-      <h2>this is a title</h2>
-      <p>this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy</p>
-      <h4>this is a bullet title</h4>
-      <ul>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-        <li>i am an item!</li>
-      </ul>
+    <div class="arrow-bottom cl"></div>
+    <div class="node-wrap right">
+      <div class="node-images right"><img src="http://placehold.it/170x100" class="left"/><img src="http://placehold.it/170x100" class="left"/></div>
+      <div class="node right">
+        <h2>this is a title</h2>
+        <p>this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy this is some awesome copy</p>
+        <h4>this is a bullet title</h4>
+        <ul>
+          <li>i am an item!</li>
+          <li>i am an item!</li>
+          <li>i am an item!</li>
+        </ul>
+      </div>
+      <div class="cl"></div>
     </div>
   </div>
   <div class="primary_flow">
@@ -88,7 +71,6 @@
     <div class="right half"></div>
   </div>
 </div>
-  </body>
-  <script data-main="js/main" src="js/require.js"></script><script>protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://'; address = protocol + window.location.host + window.location.pathname + '/ws'; socket = new WebSocket(address);
+  </body><script>protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://'; address = protocol + window.location.host + window.location.pathname + '/ws'; socket = new WebSocket(address);
 socket.onmessage = function(msg) { msg.data == 'reload' && window.location.reload() }</script>
 </html>

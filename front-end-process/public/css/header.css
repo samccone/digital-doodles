@@ -1,0 +1,63 @@
+header {
+  border: 0px;
+  text-align: center;
+  padding: 20px;
+  padding-bottom: 70px;
+  background: background-blue;
+  position: relative;
+  z-index: 10;
+  color: #525252;
+}
+header h1 {
+  margin-bottom: 50px;
+}
+header .orb {
+  width: 190px;
+  height: 190px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  background: dark-blue;
+  display: inline-block;
+  position: relative;
+  color: #fff;
+  line-height: 180px;
+}
+header .orb .hand {
+  width: 8px;
+  height: 126px;
+  position: absolute;
+  top: 150px;
+  background: dark-blue;
+  -webkit-transform: rotateZ(-142deg);
+  -moz-transform: rotateZ(-142deg);
+  -o-transform: rotateZ(-142deg);
+  -ms-transform: rotateZ(-142deg);
+  transform: rotateZ(-142deg);
+  right: 171px;
+}
+header .orb.light {
+  margin-right: 50px;
+  background: #52d7fe;
+}
+header .orb.light .hand {
+  -webkit-transform: rotateZ(142deg);
+  -moz-transform: rotateZ(142deg);
+  -o-transform: rotateZ(142deg);
+  -ms-transform: rotateZ(142deg);
+  transform: rotateZ(142deg);
+  right: 35.5px;
+  background: #52d7fe;
+}
+@media screen and (max-width: 1098px) {
+  header .orb.light .hand {
+    right: 28.5px;
+  }
+}
+@media screen and (max-width: 800px) {
+  header .orb.light .hand {
+    right: 25.5px;
+  }
+}

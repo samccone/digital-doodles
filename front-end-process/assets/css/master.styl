@@ -1,67 +1,80 @@
 global-reset()
+@import "variables"
+@import "primary_flow"
+@import "header"
 
-background-blue = #eaf4fe
-light-blue = #5fbaea
-dark-blue = #3f4857
-max-width = 1200px
 *
   box-sizing: border-box
 
 html, body
   background: background-blue
+  font-family: 'Open Sans'
+
+.cl
+  clear: both
+
+.left
+  float: left
+
+.right
+  float: right
 
 #wrap
   max-width: max-width
   width: 100%
   margin: 0px auto
   min-width: 520px
-header
-  border: 0px
-  text-align: center
-  padding: 20px
-  padding-bottom: 70px
-  background: background-blue
-  position: relative
-  z-index: 10
-  color: #525252
-  h1
-    margin-bottom: 50px
-  .orb
-    width: 190px
-    height: 190px
-    border-radius: 50%
-    background: dark-blue
-    display: inline-block
-    position: relative
-    color: #FFF
-    line-height: 180px
-    .hand
-      width: 8px
-      height: 126px
-      position: absolute
-      top: 150px
-      background: dark-blue
-      transform: rotateZ(-142deg)
-      right: 171px;
-    &.light
-      margin-right: 50px
-      background: light-blue
-      .hand
-        transform: rotateZ(142deg)
-        right: 35.5px
-        background: light-blue
-        @media screen and (max-width: 1098px)
-          right: 28.5px
-        @media screen and (max-width: 800px)
-          right: 25.5px
 
 .nodes
+  position: relative;
+  z-index: 10;
+  .arrow-top, .arrow-bottom
+    width: 48%
+    height: 115px;
+    background: url("/img/top-blue-loop.svg") no-repeat center center;
+    background-position: 100% 80%;
+    background-size: 37%;
+    position: relative
+  .arrow-bottom
+    background-image: url("/img/bottom-blue-loop.svg");
+    background-position: 101% 20%;
+  .node-wrap
+    max-width: 550px
+    width: 48%
+    position: relative
+    &.left
+      padding-right: 2%
+    &.right
+      padding-left: 2%
+    &.center
+      width: 70%
+      margin: 0px auto
+      max-width: 650px
+      margin-bottom: 30px
+      .node
+        width: 100%
+      .node-images img
+        width: 50%
+        &.left
+          padding-right: 6.5%
+        &.right
+          padding-left: 6.5%
+    .node-images
+      padding: 10px
+      img
+        width: 100%
+        height: auto
+        border-radius: 5px
+        overflow: hidden
+        margin-top: 10px
+      &.left
+        width: 30%
+      &.right
+        width: 30%
   .node
     position: relative;
-    width: 40%;
-    max-width: 500px
+    width: 69.5%;
     padding: 25px
-    left: 6%
     border-radius 3px
     -moz-background-clip padding
     -webkit-background-clip padding-box
@@ -69,8 +82,6 @@ header
     background-color #fbfdff
     box-shadow 0 1px 1px #91a8b8
     background linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%)
-    &.right
-      margin-left: 46%
     .circle
       height: 20px
       width: 20px
@@ -91,20 +102,3 @@ header
         left: 50%
         top: 0%
         margin-top: -10px
-.primary_flow
-  position: fixed
-  top: 0px
-  min-height: 100%
-  min-width: 520px
-  width: 100%
-  max-width: max-width
-  .half
-    position: absolute
-    width: 48%
-    min-height: 100%
-  .left
-    left: 0
-    border-right: solid 8px light-blue
-  .right
-    left 50%
-    border-left: solid 8px dark-blue

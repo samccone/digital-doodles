@@ -1,0 +1,21 @@
+.primary_flow {
+  position: fixed;
+  top: 0px;
+  min-height: 100%;
+  min-width: 520px;
+  width: 100%;
+  max-width: max-width;
+}
+.primary_flow .half {
+  position: absolute;
+  width: 48%;
+  min-height: 100%;
+}
+.primary_flow .left {
+  left: 0;
+  border-right: solid 8px #52d7fe;
+}
+.primary_flow .right {
+  left: 50%;
+  border-left: solid 8px dark-blue;
+}

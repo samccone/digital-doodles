@@ -1,0 +1,40 @@
+header
+  border: 0px
+  text-align: center
+  padding: 20px
+  padding-bottom: 70px
+  background: background-blue
+  position: relative
+  z-index: 10
+  color: #525252
+  h1
+    margin-bottom: 50px
+  .orb
+    width: 190px
+    height: 190px
+    border-radius: 50%
+    background: dark-blue
+    display: inline-block
+    position: relative
+    color: #FFF
+    line-height: 180px
+    .hand
+      width: 8px
+      height: 126px
+      position: absolute
+      top: 150px
+      background: dark-blue
+      transform: rotateZ(-142deg)
+      right: 171px;
+    &.light
+      margin-right: 50px
+      background: light-blue
+      .hand
+        transform: rotateZ(142deg)
+        right: 35.5px
+        background: light-blue
+        @media screen and (max-width: 1098px)
+          right: 28.5px
+        @media screen and (max-width: 800px)
+          right: 25.5px
+
