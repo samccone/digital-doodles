@@ -148,6 +148,9 @@ header {
 }
 header h1 {
   margin-bottom: 50px;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 header .orb {
   width: 190px;
@@ -320,6 +323,30 @@ body {
   background: -o-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
   background: -ms-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
   background: linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+}
+.nodes .node h2,
+.nodes .node h4 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #525252;
+}
+.nodes .node p {
+  margin: 10px 0;
+  font-size: 15px;
+  color: #71767f;
+  line-height: 20px;
+}
+.nodes .node h4 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+.nodes .node ul {
+  color: #71767f;
+  list-style: square;
+  margin-left: 20px;
+  font-size: 15px;
+  line-height: 20px;
 }
 .nodes .node .circle {
   height: 20px;

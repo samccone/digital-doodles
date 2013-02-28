@@ -10,6 +10,9 @@ header {
 }
 header h1 {
   margin-bottom: 50px;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 header .orb {
   width: 190px;
