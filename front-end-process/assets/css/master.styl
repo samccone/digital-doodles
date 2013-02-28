@@ -1,7 +1,7 @@
 global-reset()
 @import "variables"
 @import "primary_flow"
-@import "header"
+@import "_header"
 
 *
   box-sizing: border-box
@@ -39,13 +39,22 @@ html, body
     background-image: url("/img/bottom-blue-loop.svg");
     background-position: 101% 20%;
   .node-wrap
-    max-width: 550px
     width: 48%
     position: relative
     &.left
       padding-right: 2%
     &.right
       padding-left: 2%
+      .notch
+        z-index: 10;
+        margin-top: -10px;
+        top: 50%;
+        position: absolute;
+        height: 14px;
+        width: 104%;
+        margin-left: -4%;
+        background: url("/img/dark-blue-notch.svg") no-repeat left center;
+        left: 0px;
     &.center
       width: 70%
       margin: 0px auto

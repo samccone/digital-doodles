@@ -148,7 +148,7 @@ header {
 }
 header h1 {
   margin-bottom: 50px;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -251,7 +251,6 @@ body {
   background-position: 101% 20%;
 }
 .nodes .node-wrap {
-  max-width: 550px;
   width: 48%;
   position: relative;
 }
@@ -260,6 +259,17 @@ body {
 }
 .nodes .node-wrap.right {
   padding-left: 2%;
+}
+.nodes .node-wrap.right .notch {
+  z-index: 10;
+  margin-top: -10px;
+  top: 50%;
+  position: absolute;
+  height: 14px;
+  width: 104%;
+  margin-left: -4%;
+  background: url("/img/dark-blue-notch.svg") no-repeat left center;
+  left: 0px;
 }
 .nodes .node-wrap.center {
   width: 70%;
