@@ -11,6 +11,9 @@ window.requestAnimationFrame ||=
 
 window.flockingDots = []
 
+abs = (n) ->
+  (n^(n>>31))-(n>>31)
+
 generateFlockingDots  = ->
   canvas = document.createElement 'canvas'
   canvas.setAttribute 'width', mask.width
@@ -34,7 +37,6 @@ generateFlockingDots  = ->
 mask = new Image
 
 mask.onload = generateFlockingDots
-
 
 run = () ->
   width             = mask.width
@@ -86,25 +88,22 @@ class Particle
 
   draw: ->
     @ctx.beginPath()
-    @ctx.fillStyle = @color + ", #{if @opacity < 0.4 then @opacity+=0.0025 else @opacity})"
+    @ctx.fillStyle = @color + ", #{if @opacity < 0.4 then @opacity+=0.0025})"
     @ctx.arc @x, @y, 2, 0, 2 * Math.PI
     @ctx.fill()
     @ctx.closePath()
     @
 
   tick: ->
-    if Math.abs(@x - @idealSpot.x) <= 5
+    if abs(@x - @idealSpot.x) < 6
       @x = @idealSpot.x
       @velocity.x = 0
-    if Math.abs(@y - @idealSpot.y) <= 5
+    else if abs(@y - @idealSpot.y) < 6
       @y = @idealSpot.y
       @velocity.y = 0
-
-    if @x < 0 || @x > 500 then (@velocity.x = @velocity.x * -1 - 0.5)
-    if @y < 0 || @y > 500 then (@velocity.y = @velocity.y * -1 - 0.5)
-
-    @x += @velocity.x
-    @y += @velocity.y
+    else
+      @x += @velocity.x
+      @y += @velocity.y
 
     @draw()
     @
