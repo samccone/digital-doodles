@@ -1,9 +1,9 @@
 #wrap
   header
-    h1 Some Title Here
-    .orb.light designer
+    h1 Front-End Development Process
+    .orb.light Designer
       .hand
-    .orb developer
+    .orb Developer
       .hand
   .nodes
     .node-wrap.center
@@ -16,14 +16,14 @@
           li It allows a scope to be determined.
           li It allows everyone to understand the pieces.
       .node-images.bottom
-        img.left(src="http://placehold.it/170x100")
-        img.right(src="http://placehold.it/170x100")
+        .left.wireframe_left.wires
+        .right.wireframe_right.wires
         .cl
     .arrow-top
     .node-wrap.left
       .node-images.left
-        img.left(src="http://placehold.it/170x100")
-        img.left(src="http://placehold.it/170x100")
+        .style_canvas_left.img_hold
+        .style_canvas_right.img_hold
       .node.left
         h2 Style Canvassing
         p Defining and sticking to a style is critical to the visual success of the a project. For this reason the design team should explore styles across a multitude to present to the client until there is a clear sense of style to base further design decisions off of.
@@ -31,6 +31,17 @@
         ul
           li If you do not know who is doing it best it is hard to measure the success of your design.
           li Aligning style inspiration with the client will save many headaches in the end.
+      .cl
+    .node-wrap.right
+      .notch
+      .node-images.right
+      .node.right
+        h2 DOM Structure
+        p With the styles established, and the digital wires already made and hooked up. Style Integration is all that is left.
+        h4 Single Focus
+        p Since the functionality is in a stable place it allows the dev to focus on the design and implement them at a high level without having to worry about how they are going to implement featue X.
+      .node-images.bottom
+        .dom.bottom_contain
       .cl
     .arrow-bottom.cl
     .node-wrap.right
@@ -50,8 +61,8 @@
     .arrow-top
     .node-wrap.left
       .node-images.left
-        img.left(src="http://placehold.it/170x100")
-        img.left(src="http://placehold.it/170x100")
+        .component_styles_left.img_hold
+        .component_styles_right.img_hold
       .node.left
         h2 Component Styles
         p At this point the design team will be able to go off of the design inspiration and wires to develop styles in a modular fashion.
@@ -73,7 +84,7 @@
         h4 Single Focus
         p Since the functionality is in a stable place it allows the dev to focus on the design and implement them at a high level without having to worry about how they are going to implement featue X.
       .cl
-    .ship.cl.node
+    .ship.cl
         h2 Ship It
   .primary_flow
     .left.half
