@@ -1,31 +1,44 @@
 <html>
   <head>
+    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
     <style>
       ul {
         padding: 0px;
         margin: 0px;
+        position: absolute;
+        top: 0px;
+        list-style: none;
+        left: 120px;
       }
       ul li {
-        display: none;
+        font-size: 20px;
       }
       .touch-trigger {
         height: 100px;
         width: 100px;
         border-radius: 50%;
         border: solid 10px #111;
-        -webkit-transition: border 750ms cubic-bezier(0.420, 0.000, 0.580, 1.000);
+        -webkit-transition: all 500ms cubic-bezier(0.420, 0.000, 0.580, 1.000);
         -webkit-box-sizing: border-box;
-        opacity: 0.9;
+        -webkit-user-select: none;
+        opacity: 0.5;
+        bottom: 0px;
+        right: 0px;
+        position: absolute;
       }
       .touch-trigger.over {
-        border: solid 50px #28ba00;
+        border: solid 55px #28ba00;
+        height: 110px;
+        width: 110px;
+        opacity: 1;
       }
     </style>
     <script>
       window.onload = setup;
       function setup() {
         var elm = document.querySelector('.touch-trigger');
-        elm.addEventListener('touchstart', function() {
+        elm.addEventListener('touchstart', function(e) {
+          e.preventDefault();
           this.classList.add('over');
         });
         elm.addEventListener('touchend', function() {
