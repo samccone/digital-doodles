@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <style>
+      ul {
+        padding: 0px;
+        margin: 0px;
+      }
+      ul li {
+        display: none;
+      }
+      .touch-trigger {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        border: solid 10px #111;
+        -webkit-transition: border 750ms cubic-bezier(0.420, 0.000, 0.580, 1.000);
+        -webkit-box-sizing: border-box;
+        opacity: 0.9;
+      }
+      .touch-trigger.over {
+        border: solid 50px #28ba00;
+      }
+    </style>
+    <script>
+      window.onload = setup;
+      function setup() {
+        var elm = document.querySelector('.touch-trigger');
+        elm.addEventListener('touchstart', function() {
+          this.classList.add('over');
+        });
+        elm.addEventListener('touchend', function() {
+          this.classList.remove('over');
+        });
+
+        elm.addEventListener('webkitTransitionEnd', function() {
+          if (~this.className.indexOf("over")) {
+            console.log("done done");
+          }
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="touch-trigger"></div>
+    <ul>
+      <li>foo</li>
+      <li>zap</li>
+      <li>bar</li>
+      <li>tap</li>
+    </ul>
+  </body>
+</html>
