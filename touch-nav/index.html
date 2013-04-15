@@ -5,13 +5,32 @@
       ul {
         padding: 0px;
         margin: 0px;
-        position: absolute;
         top: 0px;
         list-style: none;
         left: 120px;
+        display: none;
+      }
+      .orb {
+        height: 30px;
+        width: 30px;
+        background: red;
+        border-radius: 50%;
+        position: absolute;
+        display: none;
+      }
+      ul.opened {
+        display: block;
+        -webkit-user-select: none;
       }
       ul li {
-        font-size: 20px;
+        font-size: 30px;
+        padding-bottom: 20px;
+        padding-right: 10px;
+      }
+      .touch-hold {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
       }
       .touch-trigger {
         height: 100px;
@@ -22,9 +41,6 @@
         -webkit-box-sizing: border-box;
         -webkit-user-select: none;
         opacity: 0.5;
-        bottom: 0px;
-        right: 0px;
-        position: absolute;
       }
       .touch-trigger.over {
         border: solid 55px #28ba00;
@@ -36,30 +52,48 @@
     <script>
       window.onload = setup;
       function setup() {
-        var elm = document.querySelector('.touch-trigger');
+        var elm     = document.querySelector('.touch-trigger');
+        var orb     = document.querySelector('.orb');
+        var filled  = false;
         elm.addEventListener('touchstart', function(e) {
-          e.preventDefault();
           this.classList.add('over');
+        });
+        elm.addEventListener('touchmove', function(e) {
+          orb.style.left = -100 + e.touches[0].pageX + "px";
+          orb.style.top = -10 + e.touches[0].pageY + "px";
+          if (filled) {
+            e.preventDefault();
+          }
         });
         elm.addEventListener('touchend', function() {
           this.classList.remove('over');
+          orb.style.display = "none";
+          filled = false;
+          document.querySelector('ul').classList.remove('opened');
         });
 
-        elm.addEventListener('webkitTransitionEnd', function() {
+        elm.addEventListener('webkitTransitionEnd', function(e) {
           if (~this.className.indexOf("over")) {
-            console.log("done done");
+            filled = true;
+            orb.style.display = "block";
+            document.querySelector('ul').classList.add('opened');
+            orb.style.left = -100 + e.touches[0].pageX + "px";
+            orb.style.top = -10 + e.touches[0].pageY + "px";
           }
         });
       }
     </script>
   </head>
   <body>
-    <div class="touch-trigger"></div>
+    <div class="orb"></div>
+    <div class="touch-hold">
     <ul>
       <li>foo</li>
       <li>zap</li>
       <li>bar</li>
       <li>tap</li>
     </ul>
+    <div class="touch-trigger"></div>
+    </div>
   </body>
 </html>
