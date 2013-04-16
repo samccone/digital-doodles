@@ -17,6 +17,12 @@
         border-radius: 50%;
         position: absolute;
         display: none;
+        -webkit-transition: height 200ms, width 200ms, margin 200ms;
+      }
+      .orb.can-go {
+        height: 60px;
+        width: 60px;
+        margin-top: -15px;
       }
       ul.opened {
         display: block;
@@ -24,7 +30,7 @@
       }
       ul li {
         font-size: 30px;
-        padding-bottom: 20px;
+        margin-bottom: 20px;
         padding-right: 10px;
       }
       .touch-hold {
@@ -37,7 +43,7 @@
         width: 100px;
         border-radius: 50%;
         border: solid 10px #111;
-        -webkit-transition: all 500ms cubic-bezier(0.420, 0.000, 0.580, 1.000);
+        -webkit-transition: all 300ms cubic-bezier(0.420, 0.000, 0.580, 1.000);
         -webkit-box-sizing: border-box;
         -webkit-user-select: none;
         opacity: 0.5;
@@ -52,33 +58,48 @@
     <script>
       window.onload = setup;
       function setup() {
-        var elm     = document.querySelector('.touch-trigger');
-        var orb     = document.querySelector('.orb');
-        var filled  = false;
+        var elm       = document.querySelector('.touch-trigger');
+        var orb       = document.querySelector('.orb');
+        var filled    = false;
+        var touchDown = false;
+        var lastTouch;
         elm.addEventListener('touchstart', function(e) {
+          lastTouch = e.touches[0];
+          touchDown = true;
           this.classList.add('over');
         });
         elm.addEventListener('touchmove', function(e) {
-          orb.style.left = -100 + e.touches[0].pageX + "px";
-          orb.style.top = -10 + e.touches[0].pageY + "px";
-          if (filled) {
+          lastTouch = e.touches[0];
+          if (touchDown) {
             e.preventDefault();
+            var elmAtPoint = document.elementFromPoint(e.touches[0].pageX, e.touches[0].pageY);
+            if (elmAtPoint && elmAtPoint.tagName == "LI") {
+              orb.classList.add('can-go');
+            } else {
+              orb.classList.remove('can-go');
+            }
+          }
+          if (e.touches) {
+            orb.style.left = -100 + e.touches[0].pageX + "px";
+            orb.style.top = -10 + e.touches[0].pageY + "px";
           }
         });
         elm.addEventListener('touchend', function() {
+          touchDown = false;
           this.classList.remove('over');
           orb.style.display = "none";
           filled = false;
           document.querySelector('ul').classList.remove('opened');
+          orb.classList.remove('can-go');
         });
 
         elm.addEventListener('webkitTransitionEnd', function(e) {
           if (~this.className.indexOf("over")) {
             filled = true;
-            orb.style.display = "block";
             document.querySelector('ul').classList.add('opened');
-            orb.style.left = -100 + e.touches[0].pageX + "px";
-            orb.style.top = -10 + e.touches[0].pageY + "px";
+            orb.style.left = -100 + lastTouch.pageX + "px";
+            orb.style.top = -10 + lastTouch.pageY + "px";
+            orb.style.display = "block";
           }
         });
       }
