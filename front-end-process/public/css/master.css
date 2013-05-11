@@ -230,14 +230,18 @@ body {
   min-width: 520px;
 }
 .ship {
+  left: -8px;
   height: 300px;
-  margin: 0px auto;
+  width: 500px;
+  margin: 0px auto 50px auto;
   position: relative;
   top: 90px;
+  background: transparent url("/img/ship_it@2x.png") bottom center no-repeat;
 }
 .ship h2 {
   margin-left: -20px;
   text-align: center;
+  display: none;
 }
 .nodes {
   position: relative;
@@ -268,7 +272,7 @@ body {
   padding-right: 2%;
 }
 .nodes .node-wrap.right {
-  padding-left: 2%;
+  padding-left: 1%;
 }
 .nodes .node-wrap.right .notch {
   z-index: 10;
@@ -300,7 +304,7 @@ body {
   padding-left: 6.5%;
 }
 .nodes .node-wrap .node-images {
-  padding: 10px;
+  padding: 10px 0 10px 0;
 }
 .nodes .node-wrap .node-images img {
   width: 100%;
@@ -315,6 +319,8 @@ body {
 }
 .nodes .node-wrap .node-images.left {
   width: 30%;
+  padding-top: 0;
+  padding-right: 10px;
 }
 .nodes .node-wrap .node-images.right {
   width: 30%;
@@ -400,4 +406,98 @@ body {
   left: 50%;
   top: 0%;
   margin-top: -10px;
+}
+.bottom .bottom_contain {
+  clear: both;
+  margin-top: 12px;
+  margin-left: 3px;
+  float: left;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #fbfdff;
+  -webkit-box-shadow: 0 1px 1px #91a8b8;
+  -moz-box-shadow: 0 1px 1px #91a8b8;
+  -o-box-shadow: 0 1px 1px #91a8b8;
+  -ms-box-shadow: 0 1px 1px #91a8b8;
+  box-shadow: 0 1px 1px #91a8b8;
+}
+.bottom .bottom_contain.dom {
+  background: url("/img/dom_structure.png") no-repeat center center;
+  width: 69.5%;
+  height: 120px;
+}
+.wires {
+  height: 250px;
+  width: 250px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #fbfdff;
+  -webkit-box-shadow: 0 1px 1px #91a8b8;
+  -moz-box-shadow: 0 1px 1px #91a8b8;
+  -o-box-shadow: 0 1px 1px #91a8b8;
+  -ms-box-shadow: 0 1px 1px #91a8b8;
+  box-shadow: 0 1px 1px #91a8b8;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ebf2f8), color-stop(0.02, #fff), color-stop(1, #fff));
+  background: -webkit-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: -moz-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: -o-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: -ms-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+}
+.wireframe_left {
+  background: url("/img/wireframe.png") no-repeat center center;
+}
+.wireframe_right {
+  background: url("/img/wireframe-right.png") no-repeat center center;
+}
+.img_hold {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #fbfdff;
+  -webkit-box-shadow: 0 1px 1px #91a8b8;
+  -moz-box-shadow: 0 1px 1px #91a8b8;
+  -o-box-shadow: 0 1px 1px #91a8b8;
+  -ms-box-shadow: 0 1px 1px #91a8b8;
+  box-shadow: 0 1px 1px #91a8b8;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ebf2f8), color-stop(0.02, #fff), color-stop(1, #fff));
+  background: -webkit-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: -moz-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: -o-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: -ms-linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  background: linear-gradient(bottom, #ebf2f8 0%, #fff 2%, #fff 100%);
+  height: 48%;
+  width: 160px;
+}
+.img_hold:nth-child(1) {
+  margin-bottom: 10px;
+}
+.img_hold.style_canvas_left {
+  background: url("/img/style_canvassing.png") no-repeat center center;
+}
+.img_hold.style_canvas_right {
+  background: url("/img/style_canvassing_bottom.png") no-repeat center center;
+}
+.img_hold.component_styles_left {
+  background: url("/img/style_components.png") no-repeat -20px -10px;
+}
+.img_hold.component_styles_right {
+  background: url("/img/style_components_bottom.png") no-repeat center center;
 }
