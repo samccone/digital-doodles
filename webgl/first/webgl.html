@@ -1,0 +1,118 @@
+<html>
+  <style>
+  * {padding: 0px; margin: 0px;}
+  canvas {display: block;}
+  </style>
+  <body></body>
+
+  <script src="gl-matrix-min.js"></script>
+  <script id="vs" type="x-vert-shader">
+    attribute vec3 aVertexPosition;
+
+    uniform mat4 uModelViewMatrix;
+
+    void main() {
+      vec3 position = vec3(uModelViewMatrix * vec4(aVertexPosition, 1));
+      gl_Position = vec4(position, 1.0);
+    }
+  </script>
+
+
+  <script id="fs" type="x-frag-shader">
+    precision mediump float;
+
+    uniform vec4 uMaterialColor;
+
+    void main() {
+      gl_FragColor = uMaterialColor;
+    }
+  </script>
+
+  <script>
+    c   = document.createElement("canvas");
+    document.body.appendChild(c);
+    c.setAttribute("width", window.innerWidth);
+    c.setAttribute("height", window.innerHeight);
+    gl = c.getContext("webgl");
+    gl.clearColor(0.82, 0, 0.5, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    var vs              = gl.createShader(gl.VERTEX_SHADER);
+    var fs              = gl.createShader(gl.FRAGMENT_SHADER);
+    var modelViewMatrix = mat4.create();
+
+
+    gl.shaderSource(vs, document.getElementById('vs').textContent)
+    gl.shaderSource(fs, document.getElementById('fs').textContent)
+
+    gl.compileShader(vs);
+    gl.compileShader(fs);
+
+    // Check that the shaders compiled correctly
+    if ( !gl.getShaderParameter( vs, gl.COMPILE_STATUS ) )
+        throw gl.getShaderInfoLog( vs );
+
+    if ( !gl.getShaderParameter( fs, gl.COMPILE_STATUS ) )
+        throw gl.getShaderInfoLog( fs );
+
+
+    var program = gl.createProgram();
+
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+
+    gl.linkProgram(program);
+
+    // Check that the program linked correctly
+    if ( !gl.getProgramParameter( program, gl.LINK_STATUS ) )
+        throw gl.getProgramInfoLog( program );
+
+    gl.useProgram(program);
+
+
+    program.aVertexPositionLoc  = gl.getAttribLocation(program, 'aVertextPosition');
+    program.uModelViewMatrixLoc = gl.getUniformLocation(program, 'uModelViewMatrix')
+    program.uMaterialColorLoc   = gl.getUniformLocation(program, 'uMaterialColor');
+
+    gl.uniform4f(program.uMaterialColorLoc, 1, 1, 1, 1);
+
+    var verticies = new Float32Array([
+      -1.0, -1.0, 0.0, // 2----3
+       1.0, -1.0, 0.0, // | \  |
+      -1.0,  1.0, 0.0, // |  \ |
+       1.0,  1.0, 0.0  // 0----1
+    ]);
+
+
+    var vertixBuffer = gl.createBuffer();
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertixBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, verticies, gl.STATIC_DRAW);
+
+    // http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml
+    // glEnableVertexAttribArray enables the generic vertex attribute array specified by index. glDisableVertexAttribArray disables the generic vertex attribute array specified by index. By default, all client-side capabilities are disabled, including all generic vertex attribute arrays. If enabled, the values in the generic vertex attribute array will be accessed and used for rendering when calls are made to vertex array commands such as glDrawArrays or glDrawElements.
+    gl.enableVertexAttribArray(program.aVertexPosition);
+
+    // http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml
+    // define an array of generic vertex attrib data
+    gl.vertexAttribPointer(program.aVertexPosition, 3, gl.FLOAT, false, 0, 0);
+
+    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+
+    var tick = 0;
+    function draw() {
+      tick += 0.01
+      requestAnimationFrame(draw);
+
+      mat4.identity(modelViewMatrix);
+      mat4.scale(modelViewMatrix, modelViewMatrix, [0.25, 0.25+ Math.cos(tick * 2)/2, 0.25])
+      mat4.rotateZ( modelViewMatrix, modelViewMatrix, tick );
+      gl.uniformMatrix4fv(program.uModelViewMatrixLoc, false, modelViewMatrix);
+
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+
+    draw();
+  </script>
+</html>
