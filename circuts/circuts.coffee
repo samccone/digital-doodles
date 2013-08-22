@@ -4,7 +4,7 @@ height    = window.innerHeight * density
 colors    = ["#f9d100", "#a1fa00", "#f9be83", "#cc9cde", "#ece78c", "#40a3e5"]
 circuits  = []
 
-window.onload = ->
+run = ->
   thread = 0
 
   canvas = document.createElement 'canvas'
@@ -23,8 +23,7 @@ window.onload = ->
 
     @last = new Cicuit(@last, ctx, thread)
     circuits.push(@last.draw(ctx))
-  setInterval tick, 100
-
+  setInterval tick, 50
 
 class Cicuit
   orbSize: ->
@@ -123,3 +122,5 @@ class Cicuit
     ctx.stroke()
     ctx.closePath()
 
+window.onload = ->
+  setTimeout run, 1
