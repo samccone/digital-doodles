@@ -23,13 +23,16 @@ html, body
   max-width: max-width
   width: 100%
   margin: 0px auto
-  min-width: 520px
+  min-width: min-width
 
 .ship
-  height: 300px
-  margin: 0px auto
+  height: 220px
+  width: 400px
+  margin: 0 auto 50px auto
   position: relative
   top: 90px
+  background: url("/img/ship_it@2x.png") no-repeat center center
+  background-size: 100%
   h2
     margin-left: -20px
     text-align: center
@@ -40,12 +43,12 @@ html, body
     width: 48%
     height: 115px;
     background: url("/img/top-blue-loop.svg") no-repeat center center;
-    background-position: 100% 80%;
-    background-size: 37%;
+    background-position: 100% 80%
+    background-size: 37%
     position: relative
   .arrow-bottom
     background-image: url("/img/bottom-blue-loop.svg");
-    background-position: 101% 20%;
+    background-position: 101% 20%
   .node-wrap
     width: 48%
     position: relative
@@ -54,15 +57,15 @@ html, body
     &.right
       padding-left: 2%
       .notch
-        z-index: 10;
-        margin-top: -10px;
-        top: 50%;
-        position: absolute;
-        height: 14px;
-        width: 104%;
-        margin-left: -4%;
-        background: url("/img/dark-blue-notch.svg") no-repeat left center;
-        left: 0px;
+        z-index: 10
+        margin-top: -10px
+        top: 50%
+        position: absolute
+        height: 14px
+        width: 104%
+        margin-left: -4%
+        background: url("/img/dark-blue-notch.svg") no-repeat left center
+        left: 0px
     &.center
       width: 70%
       margin: 0px auto
@@ -88,8 +91,18 @@ html, body
         width: 30%
       &.right
         width: 30%
+  .step-example
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: cover;
+    height: 100px;
+    width: 100%;
+  .wireframe
+    background-image: url("")
+  .wireframe-implementation
+    background-image: url("/img/dom_elements.png")
   .node
-    position: relative;
+    position: relative
     width: 69.5%;
     padding: 25px
     border-radius 3px
