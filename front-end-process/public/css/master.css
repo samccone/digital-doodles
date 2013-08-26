@@ -119,7 +119,7 @@ audio:not([controls]),
   position: fixed;
   top: 0px;
   min-height: 100%;
-  min-width: 520px;
+  min-width: 1024px;
   width: 100%;
   max-width: 1200px;
 }
@@ -137,9 +137,9 @@ audio:not([controls]),
   border-left: solid 8px #3f4857;
 }
 header {
-  border: 0px;
+  border: 0;
   text-align: center;
-  padding: 20px;
+  padding: 50px 20px 70px 20px;
   padding-bottom: 70px;
   background: #eaf4fe;
   position: relative;
@@ -164,6 +164,8 @@ header .orb {
   display: inline-block;
   position: relative;
   color: #fff;
+  font-size: 24px;
+  font-weight: bold;
   line-height: 180px;
 }
 header .orb .hand {
@@ -227,13 +229,20 @@ body {
   max-width: 1200px;
   width: 100%;
   margin: 0px auto;
-  min-width: 520px;
+  min-width: 1024px;
 }
 .ship {
-  height: 300px;
-  margin: 0px auto;
+  height: 220px;
+  width: 400px;
+  margin: 0 auto 50px auto;
   position: relative;
   top: 90px;
+  background: url("/img/ship_it@2x.png") no-repeat center center;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  -ms-background-size: 100%;
+  background-size: 100%;
 }
 .ship h2 {
   margin-left: -20px;
@@ -318,6 +327,23 @@ body {
 }
 .nodes .node-wrap .node-images.right {
   width: 30%;
+}
+.nodes .step-example {
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -ms-background-size: cover;
+  background-size: cover;
+  height: 100px;
+  width: 100%;
+}
+.nodes .wireframe {
+  background-image: url("");
+}
+.nodes .wireframe-implementation {
+  background-image: url("/img/dom_elements.png");
 }
 .nodes .node {
   position: relative;

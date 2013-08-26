@@ -10,7 +10,7 @@ html
     link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
     link(rel='stylesheet', href='/css/master.css')
   body
-    != yield
+    != content
 
   //- this must be included for live reload to work in developement
   //- it will be automatically ignored when deployed
