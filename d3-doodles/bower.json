@@ -1,0 +1,6 @@
+{
+  "name": "d3 sample",
+  "dependencies": {
+    "d3": "~3.4.1"
+  }
+}
