@@ -6,14 +6,20 @@ marginBottom    = 22
 height          = 100 + marginBottom
 width           = 300
 leftRightMargin = 10
+y = x = 0
 
-y = d3.scale.linear()
-      .domain([0, d3.max(data)])
-      .range([height-marginBottom, 0])
+calcY = ->
+  y = d3.scale.linear()
+        .domain([0, d3.max(data)])
+        .range([height-marginBottom, 0])
 
-x = d3.scale.linear()
-      .domain([0, data.length])
-      .range([leftRightMargin, width-leftRightMargin])
+calcX = ->
+  x = d3.scale.linear()
+        .domain([0, data.length])
+        .range([leftRightMargin, width-leftRightMargin])
+
+calcY()
+calcX()
 
 chart = d3.select('.chart')
           .attr('width', width)
@@ -33,3 +39,15 @@ xAxis = d3.svg.axis()
 chart.append('g')
      .attr('transform', -> "translate(0, #{height - marginBottom})")
      .call(xAxis)
+
+setInterval ->
+  data.push(Math.random()*100)
+  path = line(data)
+
+  calcX()
+  calcY()
+
+  chart.select('path')
+       .transition()
+       .attr 'd', path
+, 1000
