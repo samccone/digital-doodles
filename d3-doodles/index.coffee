@@ -1,27 +1,21 @@
 data = [2,5,7,3,15,4, 15, 2, 10, 10, 20, 100, 30, 60, 20]
-empty = data.map -> 0
+empty= data.map -> 0
 
 document.body.innerHTML = "<svg class='chart'></svg>";
 
 marginBottom    = 22
-height          = 100 + marginBottom
-width           = 300
+height          = 300 + marginBottom
+width           = 600
 leftRightMargin = 10
 diameter        = 2
-y = x = 0
 
-calcY = ->
-  y = d3.scale.linear()
-        .domain([0, d3.max(data)])
-        .range([height-marginBottom, 0])
+y = d3.scale.linear()
+      .domain([0, d3.max(data)])
+      .range([height-marginBottom, 0])
 
-calcX = ->
-  x = d3.scale.linear()
-        .domain([0, data.length])
-        .range([leftRightMargin, width-leftRightMargin])
-
-calcY()
-calcX()
+x = d3.scale.linear()
+      .domain([0, data.length])
+      .range([leftRightMargin, width-leftRightMargin])
 
 chart = d3.select('.chart')
           .attr('width', width)
@@ -32,7 +26,9 @@ line = d3.svg.line()
        .x((d, i) -> x(i))
        .y y
 
-chart.append("svg:path").attr("d", line(data))
+chart.append("svg:path").attr("d", line(empty))
+                        .transition().duration(500)
+                        .attr("d", line(data))
 
 xAxis = d3.svg.axis()
         .scale(x)
@@ -42,9 +38,16 @@ chart.append('g')
      .attr('transform', -> "translate(0, #{height - marginBottom})")
      .call(xAxis)
 
-C = chart.selectAll('circle')
-         .data(data).enter()
-         .append('circle')
-         .attr('cx', line.x())
-         .attr('cy', line.y())
-         .attr 'r', diameter
+chart.selectAll('circle')
+     .data(empty).enter()
+     .append('circle')
+     .attr('cx', line.x())
+     .attr('cy', line.y())
+     .attr('r', diameter)
+     .transition().duration(500)
+
+chart.selectAll('circle')
+     .data(data)
+     .transition().duration(500)
+     .attr('cx', line.x())
+     .attr('cy', line.y())
