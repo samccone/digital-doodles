@@ -7,7 +7,7 @@ leftRightMargin = 10
 diameter        = 2
 
 
-class lineDrawer
+class LineChart
   constructor: (@data) ->
     @chart = d3.select('.chart')
               .attr('width', width)
@@ -26,16 +26,18 @@ class lineDrawer
            .x((d, i) => @x(i))
            .y @y
 
-    _.each @data, (_d, i, initial = true) =>
-      @drawLine.apply(@, arguments)
+    @data.forEach (_d, i, initial = true) => @drawLine.apply(@, arguments)
 
+    @drawAxis()
+
+  drawAxis: ->
     xAxis = d3.svg.axis()
             .scale(@x)
-            .orient("bottom")
+            .orient "bottom"
 
     @chart.append('g')
          .attr('transform', -> "translate(0, #{height - marginBottom})")
-         .call(xAxis)
+         .call xAxis
 
   drawLine: (d, i, initial) ->
     empty= d.map -> 0
@@ -45,22 +47,22 @@ class lineDrawer
                             .transition().duration(500)
                             .attr("d", @line(d))
     else
-      @chart.selectAll(".circle#{i}")
+      @chart.selectAll("circle.line#{i}")
          .attr('cy', height-marginBottom)
 
-      @chart.select(".line#{i}").attr("d", @line(empty))
+      @chart.select("path.line#{i}").attr("d", @line(empty))
                             .transition().duration(500)
                             .attr("d", @line(d))
 
-    @chart.selectAll(".circle#{i}")
+    @chart.selectAll("circle.line#{i}")
          .data(empty).enter()
          .append('circle')
-         .attr('class', "circle#{i}")
+         .attr('class', "line#{i}")
          .attr('cx', @line.x())
          .attr('cy', @line.y())
          .attr('r', diameter)
 
-    @chart.selectAll(".circle#{i}")
+    @chart.selectAll("circle.line#{i}")
          .data(d)
          .transition().duration(500)
          .attr('cx', @line.x())
@@ -69,7 +71,7 @@ class lineDrawer
   redrawLine: (i) ->
     @drawLine @data[i], i, false
 
-window.ld = new lineDrawer([
+window.ld = new LineChart([
             [2,5,7,3,15,4, 15, 2, 10, 10, 20, 6, 30, 10, 20],
             [2,5,2,3,2,4, 2, 2, 10, 10, 20, 50, 30, 60, 20],
             [90,10,5,100]
