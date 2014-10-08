@@ -1,0 +1,58 @@
+<html>
+  <canvas width="624" height="427"></canvas>
+
+  <script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d')
+    var im = new Image;
+
+    im.onload = function() {
+      ctx.drawImage(im,0,0);
+
+      for(var i = 0; i < 624; ++i) {
+        var d = ctx.getImageData(i, 0, 1, 427);
+        var r = new Uint8ClampedArray(d.data.length)
+        var l = []
+
+        // Array.prototype.forEach.call(d.data, function(v, i){
+        //   if (i%4 == 0) {
+        //     l.push({
+        //       r: d.data[i],
+        //       g: d.data[i+1],
+        //       b: d.data[i+2]
+        //     });
+        //   }
+        // })
+
+        // l.sort(function(v) {
+        //   return v.r + v.g + v.b;
+        // });
+
+        // l.forEach(function(v, i) {
+        //   r[i] = 0;
+        //   r[i+1] = 0;
+        //   r[i+2] = 0;
+        //   r[i+3] = 255;
+        // });
+
+        // Array.prototype.forEach.call(d.data, function(v, i) {
+        //   d.data[i] = r[i];
+        // });
+
+        // console.log(d.data[200])
+
+
+        ;(function(dd, i) {
+          setTimeout(function() {
+            ctx.fillStyle = "rgb("+dd.data[i*4]+", "+dd.data[i*4+1]+", "+dd.data[i*4+2]+")";
+
+            ctx.fillRect(i, 0, 1, 426);
+            // ctx.putImageData(dd, i, 0);
+          }, 10 * i)
+        })(d, i)
+      }
+    }
+
+    im.src = "flower.jpg"
+  </script>
+</html>
