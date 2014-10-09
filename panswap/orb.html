@@ -12,8 +12,9 @@
         function orb(opts) {
           this.originX    = opts.x;
           this.originY    = opts.y;
-          this.fillColor  = opts.fillColor || "red";
-
+          this.fillColor  = opts.fillColor || '#'+Math.floor(Math.random()*16777215).toString(16);
+          this.rate       = opts.rate || 20;
+          
           this.s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
           this.c = document.createElementNS("http://www.w3.org/2000/svg", "circle")
 
@@ -23,8 +24,7 @@
           this.s.setAttribute("height", window.innerHeight)
           this.s.style.left ="0"
           this.s.style.top ="0"
-          this.size = window.innerHeight/2 + this.originX + this.originY
-
+          this.size = window.innerHeight/2 + this.originX + this.originY;
           this.c.setAttribute("cx", this.originX)
           this.c.setAttribute("cy", this.originY)
           this.c.setAttribute("r", this.size)
@@ -34,49 +34,46 @@
           this.s.appendChild(this.c)
           document.body.appendChild(this.s);
 
-          if (!opts.preventFill) {
-            return this.fill();
-          }
+          return this.fill();
         }
 
         orb.prototype.fill = function() {
           return new Promise(function(resolve, reject) {
-            (function(tick) {
+            (function(tick, resolve) {
               this.c.setAttribute("stroke-width", tick);
               this.c.setAttribute("r", this.size - tick/2);
 
-              r = arguments.callee;
-              window.requestAnimationFrame(function() {
-                if (this.size > tick) {
-                  r.call(this, tick+20);
+              var r = arguments.callee;
+              window.requestAnimationFrame(function(t, resolve) {
+                if (this.size > t) {
+                  r.call(this, t+this.rate, resolve);
                 } else {
                   this.c.setAttribute("fill", this.fillColor)
                   resolve(this);
                 }
-              }.bind(this));
-            }).call(this, 1);
+              }.bind(this, tick, resolve));
+            }).call(this, 1, resolve);
           }.bind(this));
         }
 
         orb.prototype.unfill = function() {
           return new Promise(function(resolve, reject) {
-            (function(tick) {
+            (function(tick, resolve) {
               this.c.setAttribute("fill", 'transparent')
               this.c.setAttribute("stroke-width", tick);
-
               this.c.setAttribute("r", this.size - tick/2);
 
-              r = arguments.callee;
-              window.requestAnimationFrame(function() {
-                if (tick>0) {
-                  r.call(this, tick-20);
+              var r = arguments.callee;
+              window.requestAnimationFrame(function(t, resolve) {
+                if (t>0) {
+                  r.call(this, t-this.rate, resolve);
                 } else {
                   this.c.setAttribute("stroke", "transparent");
                   document.body.removeChild(this.s);
                   resolve(this);
                 }
-              }.bind(this));
-            }).call(this, this.size);
+              }.bind(this, tick, resolve));
+            }).call(this, this.size, resolve);
           }.bind(this));
         }
 
@@ -84,7 +81,8 @@
           new orb({
             x: e.x,
             y: e.y
-          }).then(function(t) {
+          })
+          .then(function(t) {
             t.unfill();
           })
         })
