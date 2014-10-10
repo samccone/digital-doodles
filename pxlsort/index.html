@@ -14,7 +14,7 @@
       ctx.drawImage(im,0,0);
 
       for(var i = 0; i < w; ++i) {
-        var d = ctx.getImageData(Math.random()*624, 0, 1, h);
+        var d = ctx.getImageData(Math.random()*w, 0, 1, h);
         var nd = ctx.createImageData(1, h);
         var r = new Uint8ClampedArray(d.data.length)
         var l = []
