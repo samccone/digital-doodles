@@ -13,7 +13,7 @@ canvas.addEventListener('mousedown', function() {
 });
 
 canvas.addEventListener('mouseup', function() {
-//  finishLine(points.slice(0));
+  finishLine(points.slice(0));
   points = [];
   mouseDown = false;
 });
@@ -51,6 +51,8 @@ function drop(e) {
   points = points.concat({
     angle: angle,
     magnitude: magnitude,
+    centerX: centerX,
+    centerY: centerY,
     x1: dist * Math.sin(ninety) + centerX,
     y1: dist * Math.cos(ninety) + centerY,
     x2: -dist * Math.sin(ninety) + centerX,
@@ -70,8 +72,46 @@ function drop(e) {
   }
 }
 
-function fillSkelly(points) {
-  ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
+function finishLine(points) {
+  console.log(points[0].magnitude);
+  if (points[0].magnitude.toFixed(2) <= 0.01) {
+    return;
+  }
+
+  var nextPoint = {
+    x: points[0].centerX + (700 * points[0].magnitude) * Math.sin(points[0].angle),
+    y: points[0].centerY + (700 * points[0].magnitude) * Math.cos(points[0].angle)
+  };
+
+  ctx.fillStyle = 'rgba(0, 200, 0, 0.2)';
+  ctx.fillRect(nextPoint.x - 5, nextPoint.y - 5, 10, 10);
+
+  points[0].magnitude *= 0.90;
+  points[0].centerX = (points[0].x1 + nextPoint.x) / 2;
+  points[0].centerY = (points[0].y1 + nextPoint.y) / 2;
+  points[0].x1 = nextPoint.x;
+  points[0].y1 = nextPoint.y;
+  /*
+
+  points[1] = {
+    angle: points[0].angle,
+    magnitude: points[0].magnitude * 0.8,
+    x1:
+    y1:
+    x2:
+    y2:
+  }
+
+  fillSkelly(points, 'rgba(0, 200, 0, 0.2)');
+  points = points.slice(1);
+
+*/
+  requestAnimationFrame(finishLine.bind(null, points));
+
+}
+
+function fillSkelly(points, fill) {
+  ctx.fillStyle = fill || 'rgba(255, 0, 0, 0.1)';
 
   ctx.beginPath();
 
