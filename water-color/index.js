@@ -73,41 +73,31 @@ function drop(e) {
 }
 
 function finishLine(points) {
-  console.log(points[0].magnitude);
-  if (points[0].magnitude.toFixed(2) <= 0.01) {
+  if (points[0].magnitude.toFixed(3) <= 0.001) {
     return;
   }
 
-  var nextPoint = {
+  var ninety = points[0].angle - (90 * Math.PI/180);
+  var center = {
     x: points[0].centerX + (700 * points[0].magnitude) * Math.sin(points[0].angle),
     y: points[0].centerY + (700 * points[0].magnitude) * Math.cos(points[0].angle)
   };
+  var magnitude = points[0].magnitude * 0.9;
 
-  ctx.fillStyle = 'rgba(0, 200, 0, 0.2)';
-  ctx.fillRect(nextPoint.x - 5, nextPoint.y - 5, 10, 10);
-
-  points[0].magnitude *= 0.90;
-  points[0].centerX = (points[0].x1 + nextPoint.x) / 2;
-  points[0].centerY = (points[0].y1 + nextPoint.y) / 2;
-  points[0].x1 = nextPoint.x;
-  points[0].y1 = nextPoint.y;
-  /*
-
-  points[1] = {
+  points.push({
     angle: points[0].angle,
-    magnitude: points[0].magnitude * 0.8,
-    x1:
-    y1:
-    x2:
-    y2:
-  }
+    magnitude: magnitude,
+    centerX: center.x,
+    centerY: center.y,
+    x1: center.x + (500 * magnitude) * Math.sin(ninety),
+    y1: center.y + (500 * magnitude) * Math.cos(ninety),
+    x2: center.x + (-500 * magnitude) * Math.sin(ninety),
+    y2: center.y + (-500 * magnitude) * Math.cos(ninety)
+  });
 
   fillSkelly(points, 'rgba(0, 200, 0, 0.2)');
-  points = points.slice(1);
 
-*/
-  requestAnimationFrame(finishLine.bind(null, points));
-
+  requestAnimationFrame(finishLine.bind(null, points.slice(1)));
 }
 
 function fillSkelly(points, fill) {
