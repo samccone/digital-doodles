@@ -85,7 +85,7 @@ function finishLine(points) {
   var magnitude = points[0].magnitude * 0.9;
 
   points.push({
-    angle: points[0].angle,
+    angle: points[0].angle += (Math.floor(2 * Math.random()) ? Math.random() : -Math.random()),
     magnitude: magnitude,
     centerX: center.x,
     centerY: center.y,
