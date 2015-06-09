@@ -38,16 +38,8 @@ function drop(e) {
 
   var angle = Math.atan2(e.pageX - last.x, e.pageY - last.y);
   var ninety = angle - (90 * Math.PI/180);
-  ctx.beginPath();
-  ctx.moveTo(last.x, last.y);
-  ctx.lineTo(e.pageX, e.pageY);
-  ctx.closePath();
-  ctx.save();
-  ctx.translate(centerX, centerY);
-  ctx.moveTo(0, 0);
 
   var dist = magnitude * 500;
-  ctx.moveTo(0, 0);
   points = points.concat({
     angle: angle,
     magnitude: magnitude,
@@ -59,12 +51,7 @@ function drop(e) {
     y2: -dist * Math.cos(ninety) + centerY
   });
 
-  ctx.lineTo(dist * Math.sin(ninety), dist * Math.cos(ninety));
-  ctx.moveTo(0, 0);
-  ctx.lineTo(-dist * Math.sin(ninety), -dist * Math.cos(ninety));
-  ctx.restore();
   last = {x: e.pageX, y: e.pageY};
-  ctx.stroke();
 
   if (points.length === 2) {
     fillSkelly(points);
@@ -101,7 +88,7 @@ function finishLine(points) {
 }
 
 function fillSkelly(points, fill) {
-  ctx.fillStyle = fill || 'rgba(255, 0, 0, 0.1)';
+  ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
 
   ctx.beginPath();
 
