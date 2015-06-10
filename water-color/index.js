@@ -103,15 +103,33 @@ function fillEdges(x1, y1, x2, y2, x3, y3, x4, y4) {
 }
 
 function fillSkelly(points, fill) {
-  ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  ctx.beginPath();
+  var m = (points[1].y1 - points[0].y1) / (points[1].x1 - points[0].x1);
+  var b = points[0].y1 - m * points[0].x1;
 
-  ctx.beginPath()
-  ctx.moveTo(points[0].x1, points[0].y1);
-  ctx.lineTo(points[0].x2, points[0].y2);
-  ctx.lineTo(points[1].x2, points[1].y2);
-  ctx.lineTo(points[1].x1, points[1].y1);
+  var minX = Math.min(points[0].x1, points[1].x1);
+  var maxX = Math.max(points[0].x1, points[1].x1);
 
-  fillEdges(points[0].x1, points[0].y1, points[0].x2, points[0].y2, points[1].x1, points[1].y1, points[1].x2, points[1].y2);
+  ctx.moveTo(minX, minX * m + b);
+
+  for(var x = minX; x < maxX; x += 1) {
+    ctx.lineTo(x, Math.random() * 10 +  m * x + b);
+  }
+  ctx.lineTo(maxX, maxX * m + b);
+
+  var m2 = (points[1].y2 - points[0].y2) / (points[1].x2 - points[0].x2);
+  var b2 = points[0].y2 - m2 * points[0].x2;
+
+  var minX2 = Math.min(points[0].x2, points[1].x2);
+  var maxX2 = Math.max(points[0].x2, points[1].x2);
+
+  ctx.lineTo(maxX2, maxX2 * m2 + b2);
+  for(var x = maxX2; x > minX2; x -= 1) {
+    ctx.lineTo(x, Math.random() * 10  + m2 * x + b2);
+  }
+  ctx.lineTo(minX2, minX2 * m2 + b2);
+  ctx.stroke();
   ctx.fill();
   ctx.closePath();
 }
