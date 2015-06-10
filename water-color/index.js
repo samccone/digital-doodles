@@ -87,16 +87,31 @@ function finishLine(points) {
   requestAnimationFrame(finishLine.bind(null, points.slice(1)));
 }
 
+function fillEdges(x1, y1, x2, y2, x3, y3, x4, y4) {
+  var w = 2;
+  var topMid = {
+    x: (x2 + x4) / 2 - w/2,
+    y: (y2 + y4) / 2 - w/2
+  };
+  var bottomMid = {
+    x: (x1 + x3) / 2 - w/2,
+    y: (y1 + y3) / 2 - w/2
+  };
+
+  ctx.fillRect(topMid.x, topMid.y,  w, w);
+  ctx.fillRect(bottomMid.x, bottomMid.y, w, w);
+}
+
 function fillSkelly(points, fill) {
   ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
 
-  ctx.beginPath();
-
+  ctx.beginPath()
   ctx.moveTo(points[0].x1, points[0].y1);
   ctx.lineTo(points[0].x2, points[0].y2);
   ctx.lineTo(points[1].x2, points[1].y2);
   ctx.lineTo(points[1].x1, points[1].y1);
 
+  fillEdges(points[0].x1, points[0].y1, points[0].x2, points[0].y2, points[1].x1, points[1].y1, points[1].x2, points[1].y2);
   ctx.fill();
   ctx.closePath();
 }
