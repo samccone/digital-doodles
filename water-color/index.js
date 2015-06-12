@@ -102,8 +102,26 @@ function fillEdges(x1, y1, x2, y2, x3, y3, x4, y4) {
   ctx.fillRect(bottomMid.x, bottomMid.y, w, w);
 }
 
+function edgeNoise(m, x) {
+  return 2 * Math.random() * Math.sin(x);
+}
+
+function edgeFill(points) {
+  ctx.strokeStyle = 'rgba(37, 194, 233, 0.2)';
+  points.forEach(function(v) {
+    ctx.beginPath();
+    ctx.moveTo(v[0], v[1])
+    for(var i = 0; i < v.length; i+=2) {
+      ctx.lineTo(v[i], v[i+1]);
+    }
+    ctx.stroke();
+  });
+}
+
 function fillSkelly(points, fill) {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  var lines = [];
+
+  ctx.fillStyle = 'rgba(37, 194, 233, 0.2)';
   ctx.beginPath();
   var m = (points[1].y1 - points[0].y1) / (points[1].x1 - points[0].x1);
   var b = points[0].y1 - m * points[0].x1;
@@ -111,9 +129,11 @@ function fillSkelly(points, fill) {
   var maxX = Math.max(points[0].x1, points[1].x1);
 
   ctx.moveTo(minX, minX * m + b);
+  lines.push([]);
 
   for(var x = minX; x < maxX; x += 1) {
-    ctx.lineTo(x, Math.random() * 10 +  m * x + b);
+    lines[0].push(x, edgeNoise(points[0].magnitude, x) + m * x + b);
+    ctx.lineTo(x, edgeNoise(points[0].magnitude, x) + m * x + b);
   }
   ctx.lineTo(maxX, maxX * m + b);
 
@@ -122,20 +142,25 @@ function fillSkelly(points, fill) {
 
   var minX2 = Math.min(points[0].x2, points[1].x2);
   var maxX2 = Math.max(points[0].x2, points[1].x2);
+  lines.push([]);
 
   if (Math.sign((points[1].x1 - points[0].x1)) !== Math.sign((points[1].x2 - points[0].x2))) {
     ctx.lineTo(minX2, minX2 * m2 + b2);
     for(var x = maxX2; x > minX2; x -= 1) {
-      ctx.lineTo(x, Math.random() * 10  + m2 * x + b2);
+      lines[1].push(x, edgeNoise(points[1].magnitude, x) + m2 * x + b2);
+      ctx.lineTo(x, edgeNoise(points[1].magnitude, x) + m2 * x + b2);
     }
     ctx.lineTo(maxX2, maxX2 * m2 + b2);
   } else {
     ctx.lineTo(maxX2, maxX2 * m2 + b2);
+
     for(var x = maxX2; x > minX2; x -= 1) {
-      ctx.lineTo(x, Math.random() * 10  + m2 * x + b2);
+      lines[1].push(x, edgeNoise(points[1].magnitude, x) + m2 * x + b2);
+      ctx.lineTo(x, edgeNoise(points[1].magnitude, x) + m2 * x + b2);
     }
     ctx.lineTo(minX2, minX2 * m2 + b2);
   }
   ctx.fill();
   ctx.closePath();
+  edgeFill(lines);
 }
