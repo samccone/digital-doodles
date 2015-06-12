@@ -3,7 +3,7 @@ canvas.setAttribute('width', window.innerWidth);
 canvas.setAttribute('height', window.innerHeight);
 
 var ctx = canvas.getContext('2d');
-var GRID_SIZE = 50;
+var GRID_SIZE = 200;
 var DEBUG = 1;
 var mousedown = false;
 
@@ -22,13 +22,19 @@ function paintGrid() {
   ctx.font = "12px serif";
   for(var x = 0; x < paper.width; ++x) {
     for(var y = 0; y < paper.length/paper.width; ++y) {
-      var v = paper[paper.width * y + x].v || 0;
+      var point = paper[paper.width * y + x];
+      var v = point.v || 0;
       ctx.strokeStyle = 'orange';
       ctx.strokeRect(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
       ctx.strokeText(v.toFixed(3), x * GRID_SIZE, (y + 1) * GRID_SIZE);
       ['red', 'green', 'blue'].forEach(function(v, i) {
         ctx.strokeStyle = v;
-        //ctx.fillStyle = v;
+
+        ctx.strokeText(point[v[0]] || 0,
+            x * GRID_SIZE + (GRID_SIZE / 10 * (i + 1)) + GRID_SIZE / 5 * i,
+            12 + y * GRID_SIZE + GRID_SIZE / 2 - GRID_SIZE / 10);
+
+
         ctx.strokeRect(
             x * GRID_SIZE + (GRID_SIZE / 10 * (i + 1)) + GRID_SIZE / 5 * i,
             y * GRID_SIZE + GRID_SIZE / 2 - GRID_SIZE / 10,
@@ -48,20 +54,27 @@ function paintGrid() {
 }
 
 function calculateFill(x, y) {
-  var val = paper[paper.width * y + x].v;
+  var val = paper[paper.width * y + x];
 
-  val = val === undefined ? 0 : val;
-  return 'rgba(0,0,0,' + val + ')';
+  if (val === undefined) {
+    return 'rgba(0,0,0,0)';
+  }
+
+  return 'rgba(' +
+      (val.r || 255) + ',' +
+      (val.g || 255) + ',' +
+      (val.b || 255) + ',' +
+      (val.v || 0) + ')';
 }
 
 function addToPoint(x, y, amount) {
   var point = paper[paper.width * y + x];
   if (point !== undefined) {
     if (point.v === undefined) {
-      point.v = amount;
+      paper[paper.width * y + x] = amount;
     } else {
       if (point.v < 1) {
-        point.v += amount;
+        point.v += amount.v;
       }
     }
   }
@@ -78,7 +91,12 @@ function spreadToNeighbors(x, y) {
 
     for(var Dx = -1; Dx < 2; ++Dx) {
       for(var Dy = -1; Dy < 2; ++Dy) {
-        addToPoint(x + Dx, y + Dy, toSpread);
+        addToPoint(x + Dx, y + Dy, {
+          r: point.r,
+          g: point.g,
+          b: point.b,
+          v: toSpread
+        });
       }
     }
   }
@@ -113,5 +131,10 @@ paint();
 
 setInterval(diffuse, 16.66);
 canvas.addEventListener('mousemove', function(e) {
-  addToPoint.apply(null, getPaperPoint(e.pageX, e.pageY).concat(5));
+  addToPoint.apply(null, getPaperPoint(e.pageX, e.pageY).concat({
+    r: 40,
+    g: 160,
+    b: 210,
+    v: 1
+  }));
 });
